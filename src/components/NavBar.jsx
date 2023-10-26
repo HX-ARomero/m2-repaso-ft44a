@@ -7,6 +7,7 @@ export default function NavBar(props) {
       <span>Rick&Morty Episodes </span>
       <button>
         <NavLink
+        // { isActive: true||false }
           to="/home"
           style={({ isActive }) => isActive ? { color: "coral"} : { color: "grey" } }
         >Home</NavLink>
