@@ -1,6 +1,6 @@
 # Módulo 2 | REPASO
 
-## Cohorte FT42b - 14/09/2023
+## Cohorte FT44a - 26/10/2023
 
 ### Idea general del proyecto
 
