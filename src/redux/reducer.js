@@ -1,9 +1,15 @@
-import { ADD_FAVORITE, DELETE_FAVORITE, SET_USER } from "./action-types"
+import {
+  ADD_FAVORITE,
+  COMPLETED_FAVORITE,
+  DELETE_FAVORITE,
+  RATING_FAVORITE,
+  SET_USER,
+} from "./action-types";
 
 const initialState = {
   favorites: [], //* [ { 1 }, ..., { 7 } ]
-  user: {} //* { name: , email: }
-}
+  user: {}, //* { name: , email: }
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -11,28 +17,50 @@ const reducer = (state = initialState, action) => {
       //* payload: { name: FT44a, email:ft44a@gmail }
       return {
         ...state,
-        user: action.payload
-      }
+        user: action.payload,
+      };
     }
     case ADD_FAVORITE: {
       return {
         ...state,
-        favorites: [ ...state.favorites, action.payload ]
-      }
+        favorites: [...state.favorites, action.payload],
+      };
     }
     case DELETE_FAVORITE: {
       const filteredFavs = state.favorites.filter(
-        fav => fav.id !== action.payload
+        (fav) => fav.id !== action.payload
       );
       return {
         ...state,
-        favorites: filteredFavs
-      }
+        favorites: filteredFavs,
+      };
+    }
+    case COMPLETED_FAVORITE: {
+      const newFavorites = state.favorites.map((fav) =>
+        fav.id === action.payload
+          ? { ...fav, completed: !fav.completed }
+          : { ...fav }
+      );
+      return {
+        ...state,
+        favorites: newFavorites,
+      };
+    }
+    case RATING_FAVORITE: {
+      const newFavoritesRating = [...state.favorites];
+      const favorite = newFavoritesRating.find(
+        (fav) => fav.id === action.payload.id
+      );
+      favorite.rating = action.payload.rating;
+      return {
+        ...state,
+        favorites: newFavoritesRating,
+      };
     }
     default: {
-      return { ...state }
+      return { ...state };
     }
   }
-}
+};
 
 export default reducer;

@@ -13,7 +13,10 @@ export default function Detail(props) {
   return (
     <div>
       <h2>Detail</h2>
+      <hr />
       <h3>Title: {myFavorite.name}</h3>
+      <h4>Episode: {myFavorite.episode}</h4>
+      <h4>Characters:</h4>
       {
         myFavorite.characters.map(char => (
           <p>
